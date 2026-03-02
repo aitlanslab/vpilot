@@ -57,6 +57,11 @@ def chatgpt_login():
     global curr_acc
     res=load_and_click("images/chatgpt/login_btn.png")
     if res:
+        if is_element_present("images/chatgpt/google_login.png",duration=1):
+            pilot.click()
+            time.sleep(0.5)
+            pilot.click()
+            time.sleep(0.5)
         google_login=load_and_click("images/chatgpt/google_login.png")
         account_selection=load_and_click("images/chatgpt/google_account.png")
         curr_acc=curr_acc+1
@@ -71,6 +76,7 @@ def chatgpt_login():
             return True
     else:
         print("Error Occured")
+        pilot.hotkey("ctrl","2")
         pilot.moveTo(434,25,duration=0.5)
         pilot.click()
         time.sleep(0.5)

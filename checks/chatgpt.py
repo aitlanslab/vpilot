@@ -113,6 +113,8 @@ def load_chatgpt():
                         print("No Internet")
                         return False
                     else:
+                        pilot.hotkey("ctrl","2")
+                        time.sleep(0.5)
                         pilot.moveTo(652,71,duration=0.5)
                         pilot.click()
                         time.sleep(0.3)
