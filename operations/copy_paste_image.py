@@ -50,7 +50,9 @@ curr_acc=0
 acc_points=[
     (1619,267),
     (1619,346),
-    (1619,436)
+    (1619,436),
+    (1619,526),
+    (1619,616)
 ]
 
 def chatgpt_login():
@@ -65,7 +67,8 @@ def chatgpt_login():
         google_login=load_and_click("images/chatgpt/google_login.png")
         account_selection=load_and_click("images/chatgpt/google_account.png")
         curr_acc=curr_acc+1
-        if curr_acc==3:
+        from credentials import num_chatgpt_acc
+        if curr_acc==num_chatgpt_acc:
             curr_acc=0
         (x,y)=acc_points[curr_acc]
         pilot.moveTo(x,y,duration=0.5)
