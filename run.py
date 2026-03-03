@@ -13,7 +13,7 @@ from start import auto_start
 # Focus browser 
 pilot.moveTo(921,22,duration=0.5)
 pilot.click()
-
+annotation_count=0
 for i in range(500):
     # Check and fix
     annotation_ok=execute(load_annotation)
@@ -21,11 +21,21 @@ for i in range(500):
 
     if annotation_ok and chatgpt_ok:
         # Step 1: Copy Paste Image
-        copy_paste_image()
+        cpoy_paste_status=copy_paste_image()
+        if cpoy_paste_status:
+            print("1. Successful Copy Paste")
         # Step 2: Write Prompt and Submit
-        submit_prompt()
+        prompt_submission_status=submit_prompt()
+        if prompt_submission_status:
+            print("2. Prompt Submitted")
         # Step 3: Receive generated output and submit 
-        submit_response()
+        response_status=submit_response()
+        if response_status:
+            print("3. Successfully Submitted Reponse")
+
+        if copy_paste_image and prompt_submission_status and response_status:
+            annotation_count+=1
+        print(f"# Annotated : {annotation_count}")
     time.sleep(0.1)
     
 
