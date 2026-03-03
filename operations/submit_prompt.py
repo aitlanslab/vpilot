@@ -17,12 +17,10 @@ def write_prompt():
     pilot.press("enter")
     time.sleep(0.8)
     pyperclip.copy("") # Clean the clipboard
-    if is_element_present("images/chatgpt/send.png",duration=1,confidence=0.9):
+    while(is_element_present("images/chatgpt/send.png",duration=1,confidence=0.9)):
         load_and_click("images/chatgpt/send.png")
         time.sleep(0.2)
         pilot.click()
-    else:
-        print("Send button not found")
 
     time.sleep(1)
     if is_element_present("images/chatgpt/arrow_down.png",duration=1):
