@@ -22,20 +22,16 @@ for i in range(500):
     if annotation_ok and chatgpt_ok:
         # Step 1: Copy Paste Image
         cpoy_paste_status=copy_paste_image()
-        if cpoy_paste_status:
-            print("1. Successful Copy Paste")
         # Step 2: Write Prompt and Submit
         prompt_submission_status=submit_prompt()
-        if prompt_submission_status:
-            print("2. Prompt Submitted")
         # Step 3: Receive generated output and submit 
         response_status=submit_response()
         if response_status:
-            print("3. Successfully Submitted Reponse")
+            annotation_count=annotation_count+1
+        print(f"Annotation Count : {annotation_count}")
+        
 
-        if copy_paste_image and prompt_submission_status and response_status:
-            annotation_count+=1
-        print(f"# Annotated : {annotation_count}")
+
     time.sleep(0.1)
     
 

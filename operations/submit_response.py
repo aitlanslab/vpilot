@@ -31,4 +31,4 @@ def handle_extension():
 
 
 def submit_response():
-    handle_extension()
+    return handle_extension()

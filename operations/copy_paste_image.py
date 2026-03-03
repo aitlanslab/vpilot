@@ -11,6 +11,11 @@ def copy_image():
     if(is_element_present(copy_ss)):
         click_element(copy_ss,confidence=0.8)
         return True
+    if(is_element_present("images/bsi/no_image.png")):
+        pilot.hotkey("ctrl","1")
+        time.sleep(0.3)
+        pilot.hotkey("ctrl","r")
+        time.sleep(1)
     time.sleep(0.5)
     copy_image()
 

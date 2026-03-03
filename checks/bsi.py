@@ -1,9 +1,9 @@
 import time
 import pyautogui as pilot
 from pyautogui import ImageNotFoundException
-from utils.executor import execute
-from utils.cursors import get
+from utils.executor import execute, is_element_present, load_and_click
 from utils.operator import click_element
+from utils.cursors import get
 from credentials import email, password
 # Level 1 - Check if annotation image loaded completely
 def annotation_image_loaded():
@@ -94,6 +94,11 @@ def load_annotation():
             if page_loaded:
                 # Page Loaded but image did not came
                 print("Correct Page loaded but image did not received")
+                if(is_element_present("images/bsi/no_image.png")):
+                    pilot.hotkey("ctrl","1")
+                    time.sleep(0.3)
+                    pilot.hotkey("ctrl","r")
+                    time.sleep(1)
                 continue
             else:
                 # Check if Nav icon is visible
