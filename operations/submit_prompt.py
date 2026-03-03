@@ -29,10 +29,13 @@ def write_prompt():
     return True
 
 def handle_response():
-    successful=load_and_scroll_click("images/chatgpt/ok.png",duration=100)
+    print("Waiting for response")
+    successful=load_and_scroll_click("images/chatgpt/ok.png",duration=30)
     if successful:
+        print("Received Response")
         return True
     else:
+        print("Response timout - restarting browser")
         pilot.hotkey("ctrl","2")
         load_and_click("images/brave/reload.png",duration=1)
         return False
