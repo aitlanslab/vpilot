@@ -30,7 +30,7 @@ def write_prompt():
 
 def handle_response():
     print("Waiting for response")
-    successful=load_and_scroll_click("images/chatgpt/ok.png",duration=15)
+    successful=load_and_scroll_click("images/chatgpt/ok.png",duration=25)
     if successful:
         print("Received Response")
         return True
