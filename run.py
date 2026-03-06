@@ -24,6 +24,8 @@ for i in range(500):
         cpoy_paste_status=copy_paste_image()
         # Step 2: Write Prompt and Submit
         prompt_submission_status=submit_prompt()
+        if prompt_submission_status==False:
+            continue
         # Step 3: Receive generated output and submit 
         response_status=submit_response()
         if response_status:
