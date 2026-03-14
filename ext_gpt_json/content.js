@@ -23,7 +23,7 @@ function checkParagraph() {
   }
 
   //const codes = document.querySelectorAll("code");
-  const codes=document.getElementById("code-block-viewer")
+  const codes=document.getElementById("code-block-viewer") || document.getElementsByClassName("whitespace-pre!")[0]
   if (codes.length === 0) return;
   const text = codes.innerText.trim();
 
