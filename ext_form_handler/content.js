@@ -355,8 +355,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Translate country + decide flag BEFORE Object.entries() snapshot (prevents overwrite)
     let countryVal = translateCountry(data["country_id"]);
     if (countryVal === "0" || countryVal === 0 || data["country_id"].length==0) {
-      data["country_id"] = "225";     // Default to India (as you want)
-      data["flag_country"] = 1;       // Ensure checkbox remains checked
+      data["country_id"] = "265";     // Default to India (as you want)
+      data["flag_country"] = 0;       // Ensure checkbox remains checked
     } else {
       data["country_id"] = countryVal;
       data["flag_country"] = 0;
