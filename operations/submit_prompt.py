@@ -25,6 +25,7 @@ def write_prompt():
     time.sleep(1)
     if is_element_present("images/chatgpt/arrow_down.png",duration=1):
         click_element("images/chatgpt/arrow_down.png",confidence=0.8)
+        pilot.moveTo(1195,935,duration=0.2)
 
     return True
 
