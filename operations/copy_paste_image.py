@@ -74,7 +74,7 @@ def chatgpt_login():
         curr_acc=curr_acc+1
         from credentials import num_chatgpt_acc
         if curr_acc==num_chatgpt_acc:
-            curr_acc=0
+            return False
         (x,y)=acc_points[curr_acc]
         pilot.moveTo(x,y,duration=0.5)
         pilot.click()

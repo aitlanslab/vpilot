@@ -36,8 +36,9 @@ def handle_response():
         return True
     else:
         print("Response timout - restarting browser")
-        pilot.hotkey("ctrl","2")
-        load_and_click("images/brave/reload.png",duration=1)
+        pilot.hotkey("ctrl","2") 
+        if not load_and_click("images/chatgpt/browser_reload.png",duration=1):
+            load_and_click("images/brave/reload.png",duration=1)
         return False
     
 def submit_prompt():

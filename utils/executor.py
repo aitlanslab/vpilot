@@ -35,6 +35,7 @@ def load_and_click(path,duration=30,confidence=0.8):
         except ImageNotFoundException:
             time.sleep(0.1)
         time.sleep(0.1)
+    return False
 
 def load_and_scroll_click(path,duration=30,confidence=0.8):
     duration=duration*10

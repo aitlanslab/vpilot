@@ -1,7 +1,7 @@
 import time
 import pyautogui as pilot
 from pyautogui import ImageNotFoundException
-from utils.executor import execute
+from utils.executor import execute, load_and_click
 from utils.cursors import get
 from utils.operator import click_element
 
@@ -113,18 +113,24 @@ def load_chatgpt():
                         print("No Internet")
                         return False
                     else:
-                        pilot.hotkey("ctrl","2")
-                        time.sleep(0.5)
-                        pilot.moveTo(652,71,duration=0.5)
-                        pilot.click()
-                        time.sleep(0.3)
-                        pilot.hotkey("ctrl","a")
-                        time.sleep(0.3)
-                        pilot.typewrite("https://chatgpt.com/?temporary-chat=true",interval=0.08)
-                        time.sleep(0.3)
-                        pilot.press("enter")
-                        time.sleep(0.3)
-                        load_chatgpt()
+                        #load_and_click("images/chatgpt/browser_reload.png",duration=1):
+                        reload_btn=pilot.locateOnScreen("images/chatgpt/browser_reload.png",confidence=0.8)
+                        if reload_btn:
+                            load_and_click("images/chatgpt/browser_reload.png",duration=1)
+                            load_chatgpt()
+                        else:
+                            pilot.hotkey("ctrl","2")
+                            time.sleep(0.5)
+                            pilot.moveTo(652,71,duration=0.5)
+                            pilot.click()
+                            time.sleep(0.3)
+                            pilot.hotkey("ctrl","a")
+                            time.sleep(0.3)
+                            pilot.typewrite("https://chatgpt.com/?temporary-chat=true",interval=0.08)
+                            time.sleep(0.3)
+                            pilot.press("enter")
+                            time.sleep(0.3)
+                            load_chatgpt()
             time.sleep(0.1)
         else:
             from operations.copy_paste_image import chatgpt_login
