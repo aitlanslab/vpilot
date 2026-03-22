@@ -19,6 +19,16 @@ def handle_extension():
     if is_element_present("images/bsi/success.png"):
         pilot.hotkey("enter")
         return True
+    else:
+        # check if popup still not dismissed
+        ext_popup=pilot.locateOnScreen("images/bsi/extension_save.png",confidence=0.8)
+        if ext_popup:
+            time.sleep(0.2)
+            pilot.hotkey("ctrl","1")
+            time.sleep(0.2)
+            pilot.hotkey("ctrl","r")
+            time.sleep(2)
+            handle_extension()
     if is_element_present("images/chatgpt/invalid_json.png"):
         time.sleep(0.3)
         pilot.hotkey("enter")
