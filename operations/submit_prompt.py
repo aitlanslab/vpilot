@@ -17,8 +17,8 @@ def write_prompt():
     pilot.press("enter")
     time.sleep(0.8)
     pyperclip.copy("") # Clean the clipboard
-    while(is_element_present("images/chatgpt/send.png",duration=1,confidence=0.9)):
-        load_and_click("images/chatgpt/send.png")
+    while(is_element_present("images/gemini/send.png",duration=1,confidence=0.9)):
+        load_and_click("images/gemini/send.png")
         time.sleep(0.2)
         pilot.click()
 
