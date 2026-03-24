@@ -362,7 +362,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       data["flag_country"] = 0;
     }
     // -------------------- FIX END ----------------------------------------------------
-    
+    const coordinateRadio = document.querySelector('input[name="coordinate_format"][value="na"]');
+    if (coordinateRadio) {
+      coordinateRadio.checked = true;
+      // Trigger change event to ensure any event listeners fire
+      coordinateRadio.dispatchEvent(new Event('change', { bubbles: true }));
+    }
     Object.entries(data).forEach(([id, value]) => {
 
       // ----- LATITUDE -----

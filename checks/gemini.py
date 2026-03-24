@@ -10,23 +10,16 @@ import pyperclip
 
 
 def load_temp_chat():
-    def dismiss_intro():
-        print("Need to Dismiss intro")
-        res=find("images/gemini/intro.png")
-        if res:
-            load_and_click("images/gemini/intro_close.png")
-        return True
     def swicth_to_temp_chat():
         attempts=5
         for att in range(attempts):
             current=find("images/gemini/temp_chat.png",confidence=0.8)
             if current:
                 print(f"Found it on {(att+1)} attempts")
-                return True
-            
-            # Open Navbar
-            res=load_and_click("images/gemini/navbar.png",confidence=0.9)
-            if res:
+                return True 
+            # Check if temp chat is visible on top
+            top_visibility=find("images/gemini/temp_chat_active.png",confidence=0.6)
+            if top_visibility:
                 curr_mode=find("images/gemini/temp_chat_active.png",confidence=1)
                 if curr_mode:
                     print("Found Temp Chat")
@@ -36,8 +29,30 @@ def load_temp_chat():
                     temp_mode=load_and_click("images/gemini/temp_chat_mode.png",confidence=0.8)
                     time.sleep(0.5)
                     continue
+
+            else:
+                # Open Navbar
+                res=load_and_click("images/gemini/navbar.png",confidence=0.9)
+                if res:
+                    curr_mode=find("images/gemini/temp_chat_active.png",confidence=1)
+                    if curr_mode:
+                        print("Found Temp Chat")
+                        return True
+                    else:
+                        print("Need to enable temp chat")
+                        temp_mode=load_and_click("images/gemini/temp_chat_mode.png",confidence=0.8)
+                        time.sleep(0.5)
+                        continue
             print(f"Attemps {(att+1)}")
             continue
+    
+    def dismiss_intro():
+        print("Need to Dismiss intro")
+        res=find("images/gemini/intro.png")
+        if res:
+            load_and_click("images/gemini/intro_close.png")
+        return True
+    
     swicth_to_temp_chat()
     dismiss_intro()
 
