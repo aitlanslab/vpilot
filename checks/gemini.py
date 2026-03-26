@@ -34,6 +34,7 @@ def load_temp_chat():
                 new_chat = find("images/gemini/top_new_chat.png")
                 if new_chat:
                     load_and_click("images/gemini/top_new_chat.png", confidence=0.8)
+                    pilot.moveTo(1787,211,duration=0.3)
                     continue
                 # Open Navbar
                 res = load_and_click("images/gemini/navbar.png", confidence=0.9)
@@ -44,7 +45,14 @@ def load_temp_chat():
                         return True
                     else:
                         print("Need to enable temp chat")
-                        temp_mode = load_and_click("images/gemini/temp_chat_mode.png", confidence=0.8)
+                        pilot.press("tab",interval=0.1)
+                        time.sleep(0.1)
+                        pilot.press("tab",interval=0.1)
+                        time.sleep(0.1)
+                        pilot.press("tab",interval=0.1)
+                        time.sleep(0.1)
+                        pilot.press("enter",interval=0.1)
+                        time.sleep(0.1)
                         time.sleep(0.5)
                         continue
                     print(f"Attemps {(att+1)}")
