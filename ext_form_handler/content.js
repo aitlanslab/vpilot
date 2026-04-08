@@ -427,7 +427,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         value=""
       }
       if(id=="collection_number"){
-        value=""
+        //value=""
       }
       // ----- NORMAL -----
       setValue(id, value);
