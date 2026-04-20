@@ -356,7 +356,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     let countryVal = translateCountry(data["country_id"]);
     if (countryVal === "0" || countryVal === 0 || data["country_id"].length==0) {
       data["country_id"] = "265";     // Default to India (as you want)
-      data["flag_country"] = 0;       // Ensure checkbox remains checked
+      data["flag_country"] = 1;       // Ensure checkbox remains checked
     } else {
       data["country_id"] = countryVal;
       data["flag_country"] = 0;
@@ -390,23 +390,44 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         // keep this block, but do nothing to avoid overriding flag
       }
 
+      if (id==="family"){
+        if(value==="No Family" || value==="Not Available"){
+          setValue("flag_family",1)
+        }
+      }
+
+      if (id==="genus"){
+        if(value==="No Genus" || value==="Not Available"){
+          setValue("flag_genus",1)
+        }
+      }
+
+      if (id==="country_name"){
+        if(value==="UNKNOWN"){
+          setValue("flag_country",1)
+        }
+      }
+
+      if (id==="species"){
+        if(value==="No Species" || value==="Not Available"){
+          setValue("flag_species",1)
+        }
+      }
+
+      if (id==="is_full_date_available"){
+        if(value===false){
+          setValue("flag_collection_date",1)
+        }
+      }
+
+      if(id==="collection_date"){
+        value=value.replace("-00","-01")
+      }
+
       // ----- STATE TRANSLATION -----
       if (id === "state_id") {
         value = translateState(value);
       }
-
-
-      // ----- LONGITUDE -----
-      /*if (id === "longitude" && value) {
-        const match = value.match(/([EW])\s*(\d+)\s*[°]?\s*(\d+)'\s*([\d.]+)/);
-        if (match) {
-          setValue("lon_dir", match[1]);
-          setValue("lon_deg", match[2]);
-          setValue("lon_min", match[3]);
-          setValue("lon_sec", match[4]);
-        }
-        return;
-      }*/
 
       // ----- Check where validation is required
       if(id=="flag_family" && value==0){
@@ -429,8 +450,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       if(id=="collection_number"){
         //value=""
       }
-      // ----- NORMAL -----
-      setValue(id, value);
+      // ----- NORMAL -----   
+      checkboxes=["flag_family","flag_genus","flag_species","flag_collection_date","flag_country"]
+      if(!checkboxes.includes(id)){
+        setValue(id, value);
+      }
+      
     });
   }, 300); // <-- critical
 });
@@ -442,6 +467,9 @@ function setValue(id, value) {
 
   if (el.type === "checkbox") {
     el.checked = value === 1 || value === true;
+    chec=el.getAttribute("name")
+    console.log({key:chec,val:value})
+    
   }
   else if (el.tagName === "SELECT") {
     el.value = value;
