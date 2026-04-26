@@ -421,7 +421,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
 
       if(id==="collection_date"){
-        value=value.replace("-00","-01")
+        if(value==""){
+          setValue("flag_collection_date",0)
+        }else{
+          value=value.replace("-00","-01")
+        }
+        
       }
 
       // ----- STATE TRANSLATION -----
