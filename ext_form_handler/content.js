@@ -411,6 +411,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       if (id==="species"){
         if(value==="No Species" || value==="Not Available"){
           setValue("flag_species",1)
+        }else{
+          value=value.toLowerCase()
         }
       }
 
