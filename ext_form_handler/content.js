@@ -368,6 +368,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       // Trigger change event to ensure any event listeners fire
       coordinateRadio.dispatchEvent(new Event('change', { bubbles: true }));
     }
+    function countOccurrences(str, char) {
+  return str.split(char).length - 1;
+}
     Object.entries(data).forEach(([id, value]) => {
 
       // ----- LATITUDE -----
@@ -415,21 +418,41 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           value=value.toLowerCase()
         }
       }
-
+      /*
       if (id==="is_full_date_available"){
         if(value===false){
           setValue("flag_collection_date",1)
         }
-      }
+      }*/
 
-      if(id==="collection_date"){
+      /*if(id==="collection_date"){
+        ct=countOccurrences(value,"-")
+        if(ct!=2){
+          value=""
+        }
+
         if(value==""){
           setValue("flag_collection_date",0)
         }else{
           value=value.replace("-00","-01")
         }
         
-      }
+      }*/
+
+        if(id=="day_of_collection"){
+          setValue("collection_day",value)
+        }
+
+        if(id=="month_of_collection"){
+          setValue("collection_month",value)
+        }
+
+        if(id=="year_of_collection"){
+          setValue("collection_year",value)
+          if(value.length!=4){
+            setValue("flag_collection_date",1)
+          }
+        }
 
       // ----- STATE TRANSLATION -----
       if (id === "state_id") {
