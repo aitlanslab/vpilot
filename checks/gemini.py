@@ -91,11 +91,7 @@ def paste_image():
         click_element(prompt_ss, confidence=0.8)
         time.sleep(1)
         pilot.hotkey('ctrl', 'v')
-        time.sleep(3)
-        pilot.press("enter")
-        time.sleep(3)
-        pilot.press("enter")
-        time.sleep(3)
+        time.sleep(5)
         pilot.press("enter")
         return True
     return False
