@@ -28,13 +28,8 @@ extracted data in json. The example JSON format :
 "latitude":"N 24° 53' 15.20\"",
 "longitude":"E 91° 52' 10.50\""}```.
 Extract the information from the attached herbarium image and return the output 
-json following the expected format. Do not put any family value, if it is not available.
-You should only fill the fields where the 
-text clearly is understandable, else in case of unavailability of family,
-genus or species in the image, put "No Family","No Genus" or "No Species" 
-respectively. For complete, clear confident collection date, `is_full_date_available` 
+json following the expected format. Do not put any family value, if it is not available. For complete, clear confident collection date, `is_full_date_available` 
 should be true else false, for blank collection date keep the field value false. 
-Do not assume or borrow any value, only use informations from the image. 
 Do not take any informations from the barcode, eg.Botanical Survey of India, 
 CAL1211134324. You can do minor adjustment in spellings, get family is genus 
 is not available or get genus if family is not available. Your response should only 

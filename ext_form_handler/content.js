@@ -394,9 +394,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
 
       if (id==="family"){
-        if(value==="No Family" || value==="Not Available"){
+        if(value==="No Family" || value===""){
+          value="No Family"
           setValue("flag_family",1)
         }
+        setFamilyValue(value)
       }
 
       if (id==="genus"){
@@ -481,7 +483,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         //value=""
       }
       // ----- NORMAL -----   
-      checkboxes=["flag_family","flag_genus","flag_species","flag_collection_date","flag_country"]
+      checkboxes=["flag_family","family","flag_genus","flag_species","flag_collection_date","flag_country"]
       if(!checkboxes.includes(id)){
         setValue(id, value);
       }
@@ -490,6 +492,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }, 300); // <-- critical
 });
 
+function setFamilyValue(value){
+  const select = document.getElementById('family');
+  const option = document.createElement('option');
+  option.value = value;
+  option.text = value;
+  option.selected = true;
+
+  select.appendChild(option);
+
+  select.dispatchEvent(new Event('change', {
+      bubbles: true
+  }));
+
+  document.querySelector('#select2-family-container').textContent = value;
+}
 // ---------- Helper ----------
 function setValue(id, value) {
   const el = document.getElementById(id);

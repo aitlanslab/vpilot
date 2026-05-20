@@ -8,6 +8,9 @@ document.getElementById("fillBtn").addEventListener("click", () => {
     alert("Invalid JSON");
     return;
   }
+  if(data.family==""){
+    data.family="No Family"
+  }
 
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     chrome.tabs.sendMessage(tabs[0].id, {

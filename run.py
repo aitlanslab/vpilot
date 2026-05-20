@@ -14,8 +14,8 @@ pilot.click()
 for i in range(500):
     time.sleep(2)
     load_temp_chat()
+    write_prompt()
     copy_image()
     paste_image()
-    write_prompt()
     if handle_response():
         submit_response()

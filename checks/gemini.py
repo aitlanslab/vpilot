@@ -13,7 +13,7 @@ def load_temp_chat():
     def swicth_to_temp_chat():
         attempts = 5
         for att in range(attempts):
-            current = find("images/gemini/temp_chat.png", confidence=0.9)
+            current = find("images/gemini/temp_chat_active.png", confidence=0.9)
             if current:
                 print(f"Found temp on {(att+1)} attempts")
                 return True
@@ -86,21 +86,32 @@ def copy_image():
 
 
 def paste_image():
+    prompt_ss = "images/gemini/attachment_input.png"
+    if(find(prompt_ss)):
+        click_element(prompt_ss, confidence=0.8)
+        time.sleep(1)
+        pilot.hotkey('ctrl', 'v')
+        time.sleep(3)
+        pilot.press("enter")
+        time.sleep(3)
+        pilot.press("enter")
+        time.sleep(3)
+        pilot.press("enter")
+        return True
+    return False
+
+
+def write_prompt():
+    time.sleep(1)
+    pyperclip.copy(prompt)
+    time.sleep(1)
     prompt_ss = "images/gemini/prompt_input.png"
     if(find(prompt_ss)):
         click_element(prompt_ss, confidence=0.8)
         pilot.hotkey('ctrl', 'v')
-        return True
-    return False
-
-def write_prompt():
-    time.sleep(1)
-    pilot.click()
-    pilot.click()
-    pyperclip.copy("")  # Clean the clipboard
-    pyperclip.copy(prompt)
-    pilot.hotkey("ctrl", "v")
     time.sleep(2)
+    return True
+    """
     pilot.press("enter")
     time.sleep(2)
     pilot.press("enter")
@@ -108,6 +119,7 @@ def write_prompt():
     pilot.press("enter")
     time.sleep(0.8)
     pyperclip.copy("")
+    """
 
 def handle_response():
     print("Waiting for response")
