@@ -14,7 +14,8 @@ function isValidJSON(text) {
   }
 }
 
-var gemini_code_count=0
+var gemini_code_count = 0
+
 
 function checkParagraph() {
   // Stop if already handled
@@ -26,56 +27,55 @@ function checkParagraph() {
     //return;
   }
 
-var  last_one=""
-// For Gemini part
-if(window.location.href.includes("gemini.google.com")){
+  var last_one = ""
+  // For Gemini part
+  if (window.location.href.includes("gemini.google.com")) {
     // Use MutationObserver instead of interval polling
     const observer = new MutationObserver((mutations) => {
-        // Get ALL code containers
-        const codeContainers = document.querySelectorAll(".code-container");
-        
-        // Check each code container for JSON
-        codeContainers.forEach((container) => {
-            // Try to find the actual code element inside
-            const codeElement = container.querySelector('code') || container;
-            const text = codeElement.innerText.trim();
-            
-            if (text !== "" && isValidJSON(text)) {
-                // Check if this specific code block was already processed
-                // Using a unique identifier - you can use container itself or create an ID
-                if (!container.hasAttribute('data-json-processed')) {
-                    // Mark as processed immediately to prevent multiple alerts
-                    container.setAttribute('data-json-processed', 'true');
-                    if(last_one!=text){
-                      last_one=text
-                    alert("Valid JSON detected:\n" + text);
-                    
-                    navigator.clipboard.writeText(text)
-                        .then(() => {
-                            console.log("JSON copied to clipboard");
-                            // Optional: you can still have reload if needed
-                            // window.location.reload();
-                        })
-                        .catch(err => console.error("Failed to copy:", err));
-                      }
-                }
+      // Get ALL code containers
+      const codeContainers = document.querySelectorAll(".code-container");
+
+      // Check each code container for JSON
+      codeContainers.forEach((container) => {
+        // Try to find the actual code element inside
+        const codeElement = container.querySelector('code') || container;
+        const text = codeElement.innerText.trim();
+
+        if (text !== "" && isValidJSON(text)) {
+          // Check if this specific code block was already processed
+          // Using a unique identifier - you can use container itself or create an ID
+          if (!container.hasAttribute('data-json-processed')) {
+            // Mark as processed immediately to prevent multiple alerts
+            container.setAttribute('data-json-processed', 'true');
+            if (last_one != text) {
+              last_one = text
+              alert("Valid JSON detected:\n" + text);
+              navigator.clipboard.writeText(text)
+                .then(() => {
+                  console.log("JSON copied to clipboard");
+                  // Optional: you can still have reload if needed
+                  // window.location.reload();
+                })
+                .catch(err => console.error("Failed to copy:", err));
             }
-        });
+          }
+        }
+      });
     });
-    
+
     // Start observing
     observer.observe(document.body, {
-        childList: true,
-        subtree: true
+      childList: true,
+      subtree: true
     });
-    
+
     // Store observer to clean up later if needed
     window.geminiObserver = observer;
-}
+  }
 
-  if(window.location.href.includes("chatgpt.com")){
+  if (window.location.href.includes("chatgpt.com")) {
     //const codes = document.querySelectorAll("code");
-    const codes=document.getElementById("code-block-viewer") || document.getElementsByClassName("whitespace-pre!")[0]
+    const codes = document.getElementById("code-block-viewer") || document.getElementsByClassName("whitespace-pre!")[0]
     if (codes.length === 0) return;
     const text = codes.innerText.trim();
 

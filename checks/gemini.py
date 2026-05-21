@@ -6,6 +6,7 @@ from utils.cursors import get
 from utils.operator import click_element
 from helpers.image import find
 from credentials import prompt
+import json
 import pyperclip
 
 
@@ -69,6 +70,10 @@ def load_temp_chat():
     dismiss_intro()
 
 def copy_image():
+    no_img = "images/no_image.png"
+    if(find(no_img)):
+        print("No Image")
+        return False
     position = 211, 306
     pilot.moveTo(position, duration=0.5)
     pilot.rightClick()
@@ -83,6 +88,7 @@ def copy_image():
         time.sleep(1)
     time.sleep(0.5)
     copy_image()
+
 
 
 def paste_image():
@@ -122,6 +128,22 @@ def handle_response():
     successful = load_and_scroll_click("images/chatgpt/ok.png", duration=20)
     if successful:
         print("Received Response")
+        copied_text=pyperclip.paste()
+        # Check if family is available
+        gemini_output=json.loads(copied_text)
+        if gemini_output.get("family","")=="No Family" or gemini_output.get("family","")=="":
+            print("Need to find the family")
+            load_and_click("images/gemini/ipni_ext.png",duration=3)
+            load_and_scroll_click("images/gemini/ipni_input.png",duration=2)
+            pilot.click()
+            pilot.hotkey("ctrl","v")
+            time.sleep(1)
+            load_and_click("images/gemini/ipni_submit.png",duration=1)
+            pilot.click()
+            pilot.click()
+            got_response = load_and_scroll_click("images/chatgpt/ok.png", duration=20)
+            if got_response:
+                return True
         return True
     else:
         return False

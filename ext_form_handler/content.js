@@ -409,7 +409,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
       if (id==="country_name"){
         if(value==="UNKNOWN"){
-          setValue("flag_country",1)
+          //setValue("flag_country",1)
         }
       }
 
@@ -452,7 +452,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if(id=="year_of_collection"){
           setValue("collection_year",value)
           if(value.length!=4){
-            setValue("flag_collection_date",1)
+            //setValue("flag_collection_date",1)
           }
         }
 

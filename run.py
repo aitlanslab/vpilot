@@ -15,7 +15,9 @@ for i in range(500):
     time.sleep(2)
     load_temp_chat()
     write_prompt()
-    copy_image()
+    image_found=copy_image()
+    if not image_found:
+        break
     paste_image()
     if handle_response():
         submit_response()
