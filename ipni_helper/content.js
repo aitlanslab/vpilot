@@ -13,7 +13,7 @@
     const button = document.createElement("button");
 
     button.id = "my-extension-button";
-    button.innerText = "IPNI";
+    button.innerText = "Validate (IPNI)";
 
     Object.assign(button.style, {
         position: "fixed",
@@ -21,7 +21,7 @@
         bottom: "20px",
         zIndex: "999999",
         padding: "12px 16px",
-        background: "#2c7a7b",
+        background: "#d80202",
         color: "white",
         border: "none",
         borderRadius: "8px",
