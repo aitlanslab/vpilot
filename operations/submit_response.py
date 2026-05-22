@@ -13,7 +13,7 @@ def handle_extension():
     pilot.hotkey("ctrl","v")
     time.sleep(0.2)
     input_field=load_and_click("images/bsi/extension_fill.png",confidence=0.8)
-    time.sleep(0.2)
+    time.sleep(2)
     input_field=load_and_click("images/bsi/extension_save.png",confidence=0.8)
     time.sleep(0.2)
     if is_element_present("images/bsi/success.png"):

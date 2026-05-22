@@ -104,14 +104,18 @@ def paste_image():
 
 
 def write_prompt():
+    print("Writing prompt")
     time.sleep(1)
     pyperclip.copy(prompt)
     time.sleep(1)
     prompt_ss = "images/gemini/prompt_input.png"
     if(find(prompt_ss)):
+        print("Found Place to write prompt")
         click_element(prompt_ss, confidence=0.8)
         pilot.hotkey('ctrl', 'v')
+        print("Prompt pasted")
     time.sleep(2)
+    print("Prompt Writing completed")
     return True
     """
     pilot.press("enter")
