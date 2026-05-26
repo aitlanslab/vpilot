@@ -8,12 +8,9 @@
 
   right: 20px;
   bottom: 40px;
-
   width: 64px;
   height: 64px;
-
   object-fit: contain;
-
   cursor: pointer;
 
   z-index: 999999;
