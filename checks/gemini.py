@@ -71,35 +71,61 @@ def load_temp_chat():
 
 def copy_image():
     no_img = "images/no_image.png"
-    if(find(no_img)):
+
+    # Exit immediately if no image exists
+    if find(no_img):
         print("No Image")
         return False
-    position = 211, 306
-    pilot.moveTo(position, duration=0.5)
-    pilot.rightClick()
+
     copy_ss = "images/bsi/copy_image.png"
-    if(find(copy_ss)):
-        click_element(copy_ss, confidence=0.8)
-        return True
-    if(find("images/bsi/no_image.png")):
-        pilot.hotkey("ctrl", "1")
-        time.sleep(0.3)
-        pilot.hotkey("ctrl", "r")
-        time.sleep(1)
-    time.sleep(0.5)
-    copy_image()
+
+    while True:
+        position = (211, 306)
+
+        pilot.moveTo(position, duration=0.5)
+        pilot.rightClick()
+
+        # Success case
+        if find(copy_ss):
+            click_element(copy_ss, confidence=0.8)
+            time.sleep(0.5)
+            return True
+
+        # Retry case
+        if find("images/bsi/no_image.png"):
+            pilot.hotkey("ctrl", "1")
+            time.sleep(0.3)
+
+            pilot.hotkey("ctrl", "r")
+            time.sleep(1)
+
+        time.sleep(0.5)
 
 
 
 def paste_image():
     prompt_ss = "images/gemini/attachment_input.png"
-    if(find(prompt_ss)):
+
+    if find(prompt_ss):
         click_element(prompt_ss, confidence=0.8)
         time.sleep(1)
+
         pilot.hotkey('ctrl', 'v')
-        time.sleep(5)
+        time.sleep(2)
+
+        send_btn = "images/gemini/send.png"
+
+        # Wait until send button appears
+        print("Waiting for send btn visibility")
+        while not find(send_btn):
+            time.sleep(0.5)
+        print("got send btn")
+        print(find(send_btn))
+        time.sleep(1)
         pilot.press("enter")
+        time.sleep(0.5)
         return True
+
     return False
 
 
@@ -117,15 +143,6 @@ def write_prompt():
     time.sleep(2)
     print("Prompt Writing completed")
     return True
-    """
-    pilot.press("enter")
-    time.sleep(2)
-    pilot.press("enter")
-    time.sleep(2)
-    pilot.press("enter")
-    time.sleep(0.8)
-    pyperclip.copy("")
-    """
 
 def handle_response():
     print("Waiting for response")
@@ -134,8 +151,10 @@ def handle_response():
         print("Received Response")
         copied_text=pyperclip.paste()
         # Check if family is available
+        
         gemini_output=json.loads(copied_text)
-        if gemini_output.get("family","")=="No Family" or gemini_output.get("family","")=="":
+        gemini_output["family"]=str(gemini_output.get("family",""))
+        if gemini_output.get("family","")=="No Family" or gemini_output.get("family","")=="" or gemini_output.get("family","").lower()=="unknown" or gemini_output.get("family","").lower()=="null":
             print("Need to find the family")
             load_and_click("images/gemini/ipni_ext.png",duration=3)
             load_and_scroll_click("images/gemini/ipni_input.png",duration=2)
