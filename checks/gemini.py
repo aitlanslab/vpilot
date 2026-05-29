@@ -111,14 +111,14 @@ def paste_image():
         time.sleep(1)
 
         pilot.hotkey('ctrl', 'v')
-        time.sleep(2)
+        time.sleep(4)
 
         send_btn = "images/gemini/send.png"
 
         # Wait until send button appears
         print("Waiting for send btn visibility")
         while not find(send_btn):
-            time.sleep(0.5)
+            time.sleep(0.8)
         print("got send btn")
         print(find(send_btn))
         time.sleep(1)
