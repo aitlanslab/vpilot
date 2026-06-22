@@ -111,7 +111,7 @@ def paste_image():
         time.sleep(1)
 
         pilot.hotkey('ctrl', 'v')
-        time.sleep(4)
+        time.sleep(3)
 
         send_btn = "images/gemini/send.png"
 
@@ -123,7 +123,7 @@ def paste_image():
         print(find(send_btn))
         time.sleep(1)
         pilot.press("enter")
-        time.sleep(0.5)
+        time.sleep(1)
         return True
 
     return False
@@ -131,9 +131,9 @@ def paste_image():
 
 def write_prompt():
     print("Writing prompt")
-    time.sleep(1)
+    time.sleep(0.5)
     pyperclip.copy(prompt)
-    time.sleep(1)
+    time.sleep(0.5)
     prompt_ss = "images/gemini/prompt_input.png"
     if(find(prompt_ss)):
         print("Found Place to write prompt")
@@ -156,8 +156,8 @@ def handle_response():
         gemini_output["family"]=str(gemini_output.get("family",""))
         if gemini_output.get("family","")=="No Family" or gemini_output.get("family","")=="" or gemini_output.get("family","").lower()=="unknown" or gemini_output.get("family","").lower()=="null":
             print("Need to find the family")
-            load_and_click("images/gemini/ipni_ext.png",duration=3)
-            load_and_scroll_click("images/gemini/ipni_input.png",duration=2)
+            load_and_click("images/gemini/ipni_ext.png",duration=1)
+            load_and_scroll_click("images/gemini/ipni_input.png",duration=1)
             pilot.click()
             pilot.hotkey("ctrl","v")
             time.sleep(1)

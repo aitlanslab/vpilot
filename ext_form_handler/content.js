@@ -408,15 +408,24 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
 
       if (id === "family") {
-        if (value === "No Family" || value === "") {
+        if (value === "No Family" || value === "" || value.toLowerCase()==="unknown" || value===null || value.toLowerCase()=="null") {
           value = "No Family"
           setValue("flag_family", 1)
         }
+        value=value.replace(/\b\w/g, char => char.toUpperCase());
         setFamilyValue(value)
       }
 
+      if (id === "scientific_name") {
+        if (value === "No" || value === "" || value.toLowerCase()==="unknown" || value===null || value.toLowerCase()=="null") {
+          value = ""
+          setValue("flag_scientific_name", 1)
+        }
+        setValue("scientific_name",value)
+      }
+
       if (id === "genus") {
-        if (value === "No Genus" || value === "Not Available") {
+        if (value === "No Genus" || value === "Not Available" || value.toLowerCase()==="unknown" || value==null || value.toLowerCase()=="null") {
           value = "No Genus"
           setValue("flag_genus", 1)
         }
@@ -429,7 +438,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
 
       if (id === "species") {
-        if (value === "No Species" || value === "Not Available") {
+        if (value === "No Species" || value === "Not Available" || value.toLowerCase()==="unknown" || value==null || value.toLowerCase()=="null" || value.length==0) {
           value = "no species"
           setValue("flag_species", 1)
         } else {

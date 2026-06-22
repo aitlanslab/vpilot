@@ -81,6 +81,9 @@ document.getElementById("scrapeBtn").addEventListener("click", async () => {
             authorCitation: authors.join(" ex ")
         };
         json["family"] = getField("Family as entered in IPNI")
+        if(json["family"]==null){
+            json["family"]="null"
+        }
         navigator.clipboard.writeText(JSON.stringify(json, null, 2))
             .then(() => {
                 console.log("JSON copied to clipboard");
